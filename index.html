@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="bday.png" />
+  <title>happy birthday auliaaa</title>
+  <link rel="icon" href="https://i.ibb.co.com/hXZsYxZ/heart.png">
+  <link rel="stylesheet" href="style.css">
+  <script> alert("Kayanya ada yang ulang tuhan hari ini");</script>
+</head>
+<body>
+  <div class="page active" id="page1">
+    <img src="1.gif" alt="Cute Icon" />
+    <h1>Happy Birthday <span class="highlight">Sayangkuu ˶ᵔ ᵕ ᵔ˶ ♡</span></h1>
+    <p>your next surprise is just a click away 🩷</p>
+    <button class="button" onclick="goToPage(2)">tap ‹𝟹</button>
+  </div>
+
+  <div class="page" id="page2">
+    <img src="write.gif" alt="Envelope" />
+    <p>knock knock .. open me up! ( ∩´͈ ᐜ `͈∩)</p>
+    <button class="button" onclick="goToPage(3)">open it ‹𝟹</button>
+  </div>
+
+<div class="page" id="page3" style="font-family: 'Dancing Script', cursive;">
+    <h2>My Precious, Aulia <𝟑 .ᐟ </h2>
+    <div class="letter" id="letterText"></div>
+</div>
+
+  <audio id="bg-music" src="Party.mp3" autoplay loop muted></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const fullLetter = `happy birthday to my sweetest soul! 💗💗💗
+
+i’m so grateful for your love and kindness.
+
+wishing you a day wrapped in joy, gentle laughter, and tender moments that make your heart flutter.
+
+you mean everything to me.
+
+with all my love,
+𝜗𝜚 ur boyfreind`;
+
+    function goToPage(pageNum) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(p => p.classList.remove('active'));
+      const next = document.getElementById(`page${pageNum}`);
+      next.classList.add('active');
+
+      if (pageNum === 3) {
+        const music = document.getElementById("bg-music");
+        music.muted = false;
+        music.play().catch(e => console.log("Autoplay blocked:", e));
+
+        confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+        typeText(fullLetter, document.getElementById('letterText'), 25);
+        startFallingSymbols();
+      }
+    }
+
+    function typeText(text, element, speed) {
+      element.innerHTML = '';
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      type();
+    }
+
+            function startFallingSymbols() {
+          const emojis = ['💗', '🩷', '🌸', '🌺', '🌷', '✨', '💐', '❤️'];
+          const emojiClasses = {
+            '💗': 'growing-heart',
+            '🩷': 'pink-heart',
+            '🌸': 'cherry-blossom',
+            '🌺': 'hibiscus',
+            '🌷': 'tulip',
+            '✨': 'sparkles',
+            '💐': 'flower',
+            '❤️': 'heart'
+          };
+
+          setInterval(() => {
+            const el = document.createElement('div');
+            el.classList.add('falling');
+
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            el.innerText = randomEmoji;
+            el.classList.add(emojiClasses[randomEmoji]);
+
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.animationDuration = (3 + Math.random() * 2) + 's';
+
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 6000);
+          }, 300);
+        }
+  </script>
+</body>
+</html>
